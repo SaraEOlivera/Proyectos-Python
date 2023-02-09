@@ -11,37 +11,45 @@ def jugar():
     puntaje_usuario = 0
     puntaje_pc = 0
     while jugadas < 3:
-        respuesta_usuario = int(input("Ingresa '0' para piedra,'1' para papel o '2' para tijera: "))
-        respuesta = random.randint(0, 2)
+        try:
+            respuesta_usuario = int(input("Ingresa '0' para piedra,'1' para papel o '2' para tijera: "))
+            respuesta = random.randint(0, 2)
+            
+            if respuesta_usuario < 0 or respuesta_usuario > 2:
+                raise ValueError("Tenes que ingresar un numero entre el 0 y el 2")
 
-        if respuesta_usuario == 0 and respuesta == 1:
-            puntaje_pc+=1
-            print(f"Papel. ¡Te Gane! Vamos {puntaje_usuario} a {puntaje_pc}, \U0001F60E")
-        elif respuesta_usuario == 0 and respuesta == 2:
-            puntaje_usuario+=1
-            print(f"Tijeras. ¡Me ganaste! Vamos {puntaje_usuario} a {puntaje_pc}, \U0001F608")
-        elif respuesta_usuario == 0 and respuesta == 0:
-            print(f"Elejimos piedra. Vamos {puntaje_usuario} a {puntaje_pc}, \U0001F610")
+            if respuesta_usuario == 0 and respuesta == 1:
+                puntaje_pc+=1
+                print(f"Papel. ¡Te Gane! Vamos {puntaje_usuario} a {puntaje_pc}, \U0001F60E")
+            elif respuesta_usuario == 0 and respuesta == 2:
+                puntaje_usuario+=1
+                print(f"Tijeras. ¡Me ganaste! Vamos {puntaje_usuario} a {puntaje_pc}, \U0001F608")
+            elif respuesta_usuario == 0 and respuesta == 0:
+                print(f"Elejimos piedra. Vamos {puntaje_usuario} a {puntaje_pc}, \U0001F610")
+            
+            if respuesta_usuario == 1 and respuesta == 0:
+                puntaje_usuario+=1
+                print(f"Piedra.¡Me ganaste! Vamos {puntaje_usuario} a {puntaje_pc}, \U0001F608")
+            elif respuesta_usuario == 1 and respuesta == 1:
+                print(f"Elejimos papel. Vamos {puntaje_usuario} a {puntaje_pc}, \U0001F610")
+            elif respuesta_usuario == 1 and respuesta == 2:
+                puntaje_pc+=1
+                print(f"Papel. ¡Te gané! Vamos {puntaje_usuario} a {puntaje_pc}, \U0001F60E")  
+                
+            if respuesta_usuario == 2 and respuesta == 0:
+                puntaje_pc +=1
+                print(f"Piedra. ¡Te gané! Vamos {puntaje_usuario} a {puntaje_pc}, \U0001F60E")
+            elif respuesta_usuario == 2 and respuesta == 1:
+                puntaje_usuario += 1
+                print(f"Piedra. ¡Me ganaste! Vamos {puntaje_usuario} a {puntaje_pc}, \U0001F608")
+            elif respuesta_usuario == 2 and respuesta == 2:
+                print(f"Elegimos tijeras. Vamos {puntaje_usuario} a {puntaje_pc}, \U0001F610")
+                
+            jugadas+=1
         
-        if respuesta_usuario == 1 and respuesta == 0:
-            puntaje_usuario+=1
-            print(f"Piedra.¡Me ganaste! Vamos {puntaje_usuario} a {puntaje_pc}, \U0001F608")
-        elif respuesta_usuario == 1 and respuesta == 1:
-            print(f"Elejimos papel. Vamos {puntaje_usuario} a {puntaje_pc}, \U0001F610")
-        elif respuesta_usuario == 1 and respuesta == 2:
-            puntaje_pc+=1
-            print(f"Papel. ¡Te gané! Vamos {puntaje_usuario} a {puntaje_pc}, \U0001F60E")  
-            
-        if respuesta_usuario == 2 and respuesta == 0:
-            puntaje_pc +=1
-            print(f"Piedra. ¡Te gané! Vamos {puntaje_usuario} a {puntaje_pc}, \U0001F60E")
-        elif respuesta_usuario == 2 and respuesta == 1:
-            puntaje_usuario += 1
-            print(f"Piedra. ¡Me ganaste! Vamos {puntaje_usuario} a {puntaje_pc}, \U0001F608")
-        elif respuesta_usuario == 2 and respuesta == 2:
-            print(f"Elegimos tijeras. Vamos {puntaje_usuario} a {puntaje_pc}, \U0001F610")
-            
-        jugadas+=1
+        except ValueError as error:
+            print("Esa no es una opcion correcta, \U0001F643")
+            print(error)
     
     if jugadas == 3 and puntaje_usuario == puntaje_pc:
         print(f"Ya jugamos {jugadas} veces. Empatamos {puntaje_pc} a {puntaje_pc}. \U0001F610")            
@@ -50,14 +58,6 @@ def jugar():
     if jugadas == 3 and puntaje_usuario < puntaje_pc:
         print(f"Ya jugamos {jugadas} veces. Te gané {puntaje_pc} a {puntaje_usuario}, \U0001F60E. La \U0001F3C6 es mía!!")
     
-    """         if respuesta_usuario != 0 or respuesta_usuario != 1 or respuesta_usuario != 2:
-            print("Ingresaste una opcion incorrecta")
-            jugar_seguro = input("¿Seguro que queres jugar? s/n ")
-            if jugar_seguro.lower() == "s" :
-                jugar()
-            else:
-                print("\U0001F642")
-                exit() """
     
     jugar_de_nuevo = input("¿Jugamos de nuevo? s/n ")
     if jugar_de_nuevo.lower() == "s":
