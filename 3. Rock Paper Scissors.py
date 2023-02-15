@@ -59,12 +59,12 @@ def jugar():
         print(f"Ya jugamos {jugadas} veces. Te gané {puntaje_pc} a {puntaje_usuario}, \U0001F60E. La \U0001F3C6 es mía!!")
     
     
-    jugar_de_nuevo = input("¿Jugamos de nuevo? s/n ")
+    jugar_de_nuevo = input("¿Jugamos de nuevo? Ingresa 'si' o 'no' ")
     if jugar_de_nuevo.lower() == "s":
         print("\U0001F60D")
         jugar()
     else:
-        print("Gracias por jugar conmigo, \U0001F497")
+        print("Gracias por jugar conmigo \U0001F497")
         exit()
         
         
