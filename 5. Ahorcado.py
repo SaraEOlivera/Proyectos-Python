@@ -64,14 +64,15 @@ def imprimir_titulo(titulo, caracter="*"):
     time.sleep(1)
 
 lista_palabra=["computadora", "novela", "corazon", "caminar", "velocidad", "dinosaurio", "mariposa", "lectura", "zapallo", "elefante", "peliculas", "viernes", "febrero", "cuarenta", "anillo", "pantalon", "amanecer", "primavera", "peludo", "minecraft", "capitulo", "salud", "estornudar", "dentista", "pizarron", "colores", "esmeralda", "tortuga", "hipo", "estomago", "milanesa", "pileta", "tormenta", "celeste", "frio", "agrio", "pomelo", "coliflor", "sirena"]
-palabra_random = random.choice(lista_palabra)
-palabras_con_espacios = []
-for char in palabra_random:
-      palabras_con_espacios.append(char + ' ')
+
       
 letras_usadas = []
 
 def adivinar_palabra():
+      palabra_random = random.choice(lista_palabra)
+      palabras_con_espacios = []
+      for char in palabra_random:
+            palabras_con_espacios.append(char + ' ')
       progreso = []
       errores = 0
       for i in range(len(palabra_random)):
@@ -101,23 +102,22 @@ def adivinar_palabra():
                   time.sleep(1)
                   print(f"Perdiste! La palabra era {palabra_random}")
                   break
+            
             print(''.join(progreso))
             print(f"Letras que ya ingresaste {letras_usadas}")
             print("Ingresa una letra: ")
             letra_usuario=input()
-            if letra_usuario.isalpha() == False:
-                  print("Caracter invalido. Ingresa una letra")
-                  letra_usuario=input()
-            if letra_usuario in letras_usadas:
-                  print("!Esa letra ya la usaste!")
-            else:
-                  letras_usadas.append(letra_usuario)
+            if letra_usuario.isalpha():
+                  if letra_usuario in letras_usadas:
+                        print("¡Esa letra ya la usaste!")
+                  else:
+                        letras_usadas.append(letra_usuario)
                   
-                  hay_error = True
-                  for i in range(len(palabra_random)):
-                        if letra_usuario == palabra_random[i]:
-                              progreso[i] = letra_usuario + ' '
-                              hay_error = False
+                        hay_error = True
+                        for i in range(len(palabra_random)):
+                              if letra_usuario == palabra_random[i]:
+                                    progreso[i] = letra_usuario + ' '
+                                    hay_error = False
                               
                   if hay_error:
                         errores += 1
@@ -136,7 +136,7 @@ def jugar_de_nuevo():
             time.sleep(1)
             letras_usadas.clear()
             adivinar_palabra()
-      else:
+      if otra_vez.lower() == "no" or otra_vez.lower() == "n":
             print("Gracias por jugar.")
             time.sleep(1)
             os.system('cls')
