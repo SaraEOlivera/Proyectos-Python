@@ -1,75 +1,72 @@
-# 1. Definir lista de unidades, decenas, centenas. ok
-# 2. Lograr una funcion que lea el primer bloque 
-# 3. Realizar funcion que separe el numero en bloques de 3.
-#   a. Bloque 1: lee centenas decenas unidades  --> 999
-#   b. Bloque 2: lee bloque 2 + "miles" + bloque 1  999.999  
-#   c. Bloque 3: lee bloque 3 + "milones" + bloque 2
-# 4. Revisar casos especiales
 import random
 
-unidades = ['', 'uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve',]
-decenas = ['', 'dieci', 'veinti', 'treinta y ', 'cuarenta y ', 'cincuenta y ', 'sesenta y ', 'setenta y', 'ochenta y ', 'noventa y ',]
-centenas = ['', 'ciento', 'doscientos', 'trescientos', 'cuatrocientos', 'quinientos', 'seiscientos', 'setecientos', 'ochocientos', 'novecientos',]
-
-
-def leer_numeros_bloque_dos(numero):
-    en_palabras = ''
-    numero = '0' *(3-len(str(numero))) + str(numero)
-            
-    unidad = int(numero[-1])
-    decena = int(numero[-2])
-    centena = int(numero[-3])
-    numero = str(numero)
-    en_palabras = '{} {}{} mil'.format(centenas[centena], decenas[decena], unidades[unidad]).strip()
-        
-    return en_palabras.capitalize()
-
-
-def leer_numeros_bloque_uno(numero):
-    
+def number_to_words(numero:int) -> str:
     if numero == 0:
         return 'Cero'
-    elif numero == 100:
-        return 'Cien'
-    
-    numero_en_palabras = ''
+    elif numero == 1000:
+        return 'Mil'
+    elif numero == 1000000:
+         return 'Un millon'
 
+    en_palabras= ''
     
-    numero = '0' *(3-len(str(numero))) + str(numero)
+    unidades =['', 'uno','dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve']
+    decenas = ['', 'dieci', 'veinti', 'treinta y ', 'cuarenta y ', 'cincuenta y ', 'sesenta y ', 'setenta y ', 'ochenta y ', 'noventa y ']
+    centenas = ['', 'ciento', 'doscientos', 'trescientos', 'cuatrocientos', 'quinientos', 'seiscientos', 'setecientos', 'ochocientos', 'novecientos']
+    unidades_millon = unidades_mil = unidades
+    decenas_mil = decenas
+    centenas_mil = centenas
+    
+    numero = '0' * (7-len(str(numero))) + str(numero)
     
     unidad = int(numero[-1])
     decena = int(numero[-2])
     centena = int(numero[-3])
-    if len(numero) > 3:
-        return leer_numeros_bloque_dos(numero)
-    numero = str(numero)
-    numero_en_palabras = '{} {}{}'.format(centenas[centena], decenas[decena], unidades[unidad]).strip()
+    unidad_mil = int(numero[-4])
+    decena_mil = int(numero[-5])
+    centena_mil = int(numero[-6])
+    unidad_millon = int(numero[-7])
     
-    numero_en_palabras = numero_en_palabras.replace('dieciuno', 'once')
-    numero_en_palabras = numero_en_palabras.replace('diecidos', 'doce')
-    numero_en_palabras = numero_en_palabras.replace('diecitres', 'trece')
-    numero_en_palabras = numero_en_palabras.replace('diecicuatro', 'catorce')
-    numero_en_palabras = numero_en_palabras.replace('diecicinco', 'quince')
+    if len(numero) == 1:
+        en_palabras = '{}'.format(unidades[unidad]).strip()
+    if len(numero) == 2:
+        en_palabras = '{}{}'.format(decenas[decena], unidades[unidad]).strip()
+    if len(numero) == 3:
+        en_palabras = '{}{}{}'.format(centenas[centena], decenas[decena], unidades[unidad]).strip()
+    if len(numero) == 4:
+        en_palabras = '{} mil {} {}{}'.format(unidades_mil[unidad_mil], centenas[centena], decenas[decena], unidades[unidad]).strip()
+    elif len(numero) == 5:
+        en_palabras = '{}{} mil {} {}{}'.format(decenas_mil[decena_mil], unidades_mil[unidad_mil], centenas[centena], decenas[decena], unidades[unidad]).strip()
+    elif len(numero) == 6:
+        en_palabras = '{} {}{} mil {} {}{}'.format(centenas_mil[centena_mil],decenas_mil[decena_mil] ,unidades_mil[unidad_mil], centenas[centena], decenas[decena], unidades[unidad]).strip()
+    elif len(numero) == 7:
+        en_palabras = '{} millones {} {}{} mil {} {}{}'.format(unidades_millon[unidad_millon], centenas_mil[centena_mil],decenas_mil[decena_mil] ,unidades_mil[unidad_mil], centenas[centena], decenas[decena], unidades[unidad]).strip()
     
-    if numero_en_palabras.endswith('dieci'):
-        numero_en_palabras = numero_en_palabras.replace('dieci', 'diez')
-    elif numero_en_palabras.endswith('veinti'):
-        numero_en_palabras = numero_en_palabras.replace('veinti', 'veinte')
-    elif numero_en_palabras.endswith(' y'):
-        numero_en_palabras = numero_en_palabras[:-2] 
-            
-    return numero_en_palabras.capitalize()
+ 
+    #casos especiales a cambiar:
+    en_palabras = en_palabras.replace('dieciuno', 'once')
+    en_palabras = en_palabras.replace('diecidos', 'doce')
+    en_palabras = en_palabras.replace('diecitres', 'trece')
+    en_palabras = en_palabras.replace('diecicuatro', 'catorce')
+    en_palabras = en_palabras.replace('diecicinco', 'quince')
+    en_palabras = en_palabras.replace('uno mil', 'un mil')
+    en_palabras = en_palabras.replace('uno millones', 'un millon')
 
-
-
-
-#valor = random.randint(0, 99999)
-valor = 773614
-print(valor[0])
-#print (leer_numeros_bloque_dos(valor))
-print(leer_numeros_bloque_uno(valor))
     
-    
+    #cuando termina en:
+    if en_palabras.endswith('dieci'):
+        en_palabras = en_palabras.replace('dieci', 'diez')
+    elif en_palabras.endswith('veinti'):
+        en_palabras = en_palabras.replace('veinti', 'veinte')
+    elif en_palabras.endswith(' y'):
+        en_palabras = en_palabras[:-2]
+    elif en_palabras.endswith('ciento'):
+        en_palabras = en_palabras.replace('ciento', 'cien')
 
-        
+    
+    return en_palabras.capitalize() 
+
+
+valor= random.randint(0, 9999999)
+print(valor , "se escribe:", number_to_words(valor))
     
