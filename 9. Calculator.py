@@ -24,13 +24,12 @@ def check_opcion():
     while True:
         try:
             opcion=int(input("Ingrese una opcion "))
-            print("ok")
             break
         except ValueError:
             print("Numero invalido. Intente de nuevo")
             
     if opcion < 0 or opcion < 5:
-        numero_1 = int(input("Ingrese el primer valor: "))
+        numero_1 = int(input("Ingrese el primer valor: "))    
         numero_2 = int(input("Ingrese el segundo valor: "))
     if opcion == 1:
         sumar(numero_1, numero_2)
@@ -45,10 +44,6 @@ def check_opcion():
         exit()
     if opcion < 1 or opcion > 5:
         print("La opcion ingresada no es correcta.")
-
-            
-
-
 
 
 def sumar(numero1, numero2):
@@ -67,8 +62,20 @@ def dividir(numero1, numero2):
     resultado = numero1 / numero2
     print(f"La division de ambos numeros es igual a {resultado}")
 
-
+def elegir_otra_operacion():
+      otra_vez = input("¿Desea realizar otra operacion? [si / no] ")                                   
+      if otra_vez.lower()=="si" or otra_vez.lower() == "s":
+            os.system('cls')
+            time.sleep(1)
+            mostrar_menu()
+            check_opcion()
+      if otra_vez.lower() == "no" or otra_vez.lower() == "n":
+            print("Gracias")
+            time.sleep(1)
+            os.system('cls')
+            exit()
 
 imprimir_titulo("Calculadora de operaciones basicas")
 mostrar_menu()
 check_opcion()
+elegir_otra_operacion()
