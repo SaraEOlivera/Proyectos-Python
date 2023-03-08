@@ -29,8 +29,8 @@ def check_opcion():
             print("Numero invalido. Intente de nuevo")
             
     if opcion < 0 or opcion < 5:
-        numero_1 = int(input("Ingrese el primer valor: "))    
-        numero_2 = int(input("Ingrese el segundo valor: "))
+        numero_1 = float(input("Ingrese el primer valor: "))    
+        numero_2 = float(input("Ingrese el segundo valor: "))
     if opcion == 1:
         sumar(numero_1, numero_2)
     if opcion == 2:
