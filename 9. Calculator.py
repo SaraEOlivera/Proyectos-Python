@@ -7,6 +7,7 @@ def imprimir_titulo(titulo, caracter="*"):
     print(caracter * len(titulo))
     time.sleep(1)
 
+
 def mostrar_menu():
     print('Ingrese la operacion que desea realizar')    
     print('''
@@ -50,17 +51,21 @@ def sumar(numero1, numero2):
     resultado = numero1 + numero2
     print(f"La suma de ambos numeros es igual a {resultado}")
 
+
 def restar(numero1, numero2):
     resultado = numero1 - numero2
     print(f"La resta de ambos numeros es igual a {resultado}")
+
 
 def multiplicar(numero1, numero2):
     resultado = numero1 * numero2
     print(f"La multiplicacion de ambos numeros es igual a {resultado}")
 
+
 def dividir(numero1, numero2):
     resultado = numero1 / numero2
     print(f"La division de ambos numeros es igual a {resultado}")
+
 
 def elegir_otra_operacion():
       otra_vez = input("¿Desea realizar otra operacion? [si / no] ")                                   
@@ -74,6 +79,7 @@ def elegir_otra_operacion():
             time.sleep(1)
             os.system('cls')
             exit()
+
 
 imprimir_titulo("Calculadora de operaciones basicas")
 mostrar_menu()
